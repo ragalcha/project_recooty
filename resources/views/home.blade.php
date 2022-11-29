@@ -1,6 +1,4 @@
- @if(empty(session('id'))
- header("Location: {{url('/logout')}}");
- @endif
+
 <html lang="en">
 <head>
   <title>Bootstrap Example</title>
@@ -241,12 +239,7 @@ header img{
                 <div class="card-body d-flex flex-column align-items-center">
                    <h4 class="card-title">{{$item->name}}</h4>
                     <p class="card-text">New friend sugestion</p>
-                    @foreach($frnd_list as $data)  
-                    @if($data->status!=1)
                     <a href="{{ url('/friends')}}/{{$item->id}}" class="btn btn-primary">add friend</a>
-                    @else
-
-                    @endif
                 </div>
             </div>
         </div>
