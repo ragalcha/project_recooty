@@ -39,10 +39,11 @@ class ProjectController extends Controller
     {
       $keyword=$request->get('email');
       $info= Customer::where('email','LIKE',"%$keyword%")->get();
-      $users= Customer::where('email','!=',"$keyword")->get(); 
+      $users= Customer::where('email','!=',"$keyword")->paginate($perPage); 
       $data=compact('info','users');
       $pass="";
       $notification=0;
+      $perPage=8;
     
         foreach($info as $item)
       {
@@ -76,6 +77,7 @@ class ProjectController extends Controller
 
     function search(Request $request)
     {
+      $perPage=8;
       $keyword=$request->get('search');
       $not=session('id');
       $info=Customer::where('email','LIKE',"%$keyword%")->get(); 
@@ -91,7 +93,7 @@ class ProjectController extends Controller
         if(!empty($keyword))
         {
             $users= Customer::where('email','LIKE',"%$keyword%")
-                       ->orWhere('name','LIKE',"%$keyword%")->get();
+                       ->orWhere('name','LIKE',"%$keyword%")->paginate($perPage);
             return view('home',compact('users','info','req','notification','frnd_list'));
         }
 
@@ -111,8 +113,9 @@ class ProjectController extends Controller
     {   
         $keyword=session('email');
         $not=session('id');
+        $perPage=8;
         $info=Customer::where('email','LIKE',"%$keyword%")->get();
-        $users= Customer::where('email','!=',"$keyword")->get(); 
+        $users= Customer::where('email','!=',"$keyword")->paginate($perPage); 
         // $req = DB::table('customers')->join('friends','customers.id',"=",'friends.user_id') ->whereNot(function ($query) {
         //     $query->where('frnd_id','=',session('id'))
         //         ->orWhere('status', '<>', 1);

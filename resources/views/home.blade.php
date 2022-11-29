@@ -234,6 +234,7 @@ header img{
     </div>
    @endif
      @foreach($users as $item)  
+    <br>
     <div class="col-3 mx-auto">
             <div class="card shadow border">
                 <div class="card-body d-flex flex-column align-items-center">
@@ -243,6 +244,7 @@ header img{
                 </div>
             </div>
         </div>
+       <br>
      @endforeach 
     </div>
 </div>
@@ -251,7 +253,7 @@ header img{
 <br>
 <br>
 <!-- foooter -->
-
+<div class="text-center"> {{ $users->onEachSide(5)->links() }}</div> 
 <div class="footer-dark">
         <footer>
             <div class="container">
